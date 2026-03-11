@@ -83,8 +83,7 @@ def unpack_tgz(tar_path: str, folder_path: str, password: str) -> None:
         with securetar.SecureTarFile(
             tar_path,
             gzip=True,
-            key=password_to_key(password) if password else None,
-            mode="r",
+            password=password,
         ) as fp:
             fp.extractall( #type: ignore
                 path=folder_path,
