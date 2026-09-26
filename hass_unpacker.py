@@ -92,6 +92,9 @@ def unpack_tgz(tar_path: str, folder_path: str, password: str) -> None:
             )
     except tarfile.ReadError:
         fatal('Bad content or incorrect password!')
+    except TypeError:
+        # Old securetar, requiring "key" instead of "password" parameter.
+        fatal('Outdated securetar library, please upgrade!')
 
 
 def unpack_nested(tar_path: str, password: str, files: list):
